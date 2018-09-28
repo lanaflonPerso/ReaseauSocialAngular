@@ -15,13 +15,27 @@ import { BookListComponent } from './book-list/book-list.component';
 import { SingleBookComponent } from './book-list/single-book/single-book.component';
 import { BookFormComponent } from './book-list/book-form/book-form.component';
 import { HeaderComponent } from './header/header.component';
+import { AddMovieComponent } from './movie/add-movie/add-movie.component';
+import { AddPeopleComponent } from './people/add-people/add-people.component';
+import { PeopleService } from './services/people.service';
+import { MovieService } from './services/movie.service';
+import { ViewMovieComponent } from './movie/view-movie/view-movie.component';
+import { ViewLikeComponent } from './like/view-like/view-like.component';
 
 const appRoutes: Routes = [
   { path: 'auth/signup', component: SignupComponent },
-  { path: 'auth/signin', component: SignupComponent },
+  { path: 'auth/signin', component: SigninComponent },
   { path: 'books', component: BookListComponent },
   { path: 'books/new', component: BookFormComponent },
-  { path: 'books/view/:id', component: SingleBookComponent }
+  { path: 'books/view/:id', component: SingleBookComponent },
+
+  { path: 'movies/add', component: AddMovieComponent },
+  { path: 'movies/:id', component: ViewMovieComponent },
+
+	{ path: 'peoples/add', component: AddPeopleComponent }
+
+
+
 ];
 
 @NgModule({
@@ -32,7 +46,11 @@ const appRoutes: Routes = [
     BookListComponent,
     SingleBookComponent,
     BookFormComponent,
-    HeaderComponent
+    HeaderComponent,
+    AddMovieComponent,
+    AddPeopleComponent,
+    ViewMovieComponent,
+    ViewLikeComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +62,8 @@ const appRoutes: Routes = [
   providers: [
     AuthService,
     BooksService,
+    PeopleService,
+    MovieService,
     AuthGuardService
   ],
   bootstrap: [AppComponent]
