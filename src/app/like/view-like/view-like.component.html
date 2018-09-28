@@ -1,0 +1,18 @@
+<div class="vote"> <!-- changer la classe -->
+
+    <div class="vote_bar">
+    	<div class="vote_progress" [ngStyle]="{'width': progressBar}"></div>
+    </div>
+  
+    <div class="vote_btns">
+  
+    	<form action="" method="post">
+    		<button type="submit" class="vote_btn vote_like"><i class="fa fa-thumbs-up">{{ likeCount }}</i></button>
+    	</form>		
+  
+    	<form action="" method="post">
+    		<button type="submit" class="vote_btn vote_dislike"><i class="fa fa-thumbs-down">{{ dislikeCount }}</i></button>
+    	</form>
+  
+    </div>
+</div>

@@ -6,6 +6,8 @@
     <div class="col-md-7">
         <h1>{{ movie.title }} {{ movie.releaseDate }}</h1>
 
+        <app-view-like [dislikeCount]="movie.dislikeCount" [likeCount]="movie.likeCount" [progressBar]="progressBar"></app-view-like>
+
         <p>{{ movie.synopsis }}</p>
     </div>
 

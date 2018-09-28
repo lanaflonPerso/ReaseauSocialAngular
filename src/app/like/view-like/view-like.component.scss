@@ -1,0 +1,57 @@
+$rouge: #F2504B;
+$vert: #63B96B;
+
+.vote {
+    width: 150px;
+    margin: 50px 0;
+    text-align: right;
+    form {
+        display: inline-block;
+    }
+}
+
+.vote_bar {
+    width: 100%;
+    height: 4px;
+    background: $rouge;
+}
+
+.vote_progress {
+    width: 0%;
+    height: 4px;
+    background: $vert;
+}
+
+.vote_btns {
+    margin-top: 10px;
+    text-align: right;
+}
+
+.vote_btn {
+    border: none;
+    padding: 0;
+    display: inline-block;
+    margin: 0 0 0 10px;
+    cursor: pointer;
+    background: transparent;
+    transition: 0.3s;
+}
+
+.vote_like:hover, .is-liked  .vote_like{
+    color: $vert;
+}
+
+.vote_dislike:hover, .is-disliked  .vote_dislike{
+    color: $rouge;
+}
+
+form {
+    margin: 15px 0px;
+    input {
+        margin: 6px 0px; 
+    }
+    .btn-primary {
+        display: block;
+        margin: 10px auto; 
+    }
+}

@@ -9,6 +9,9 @@ export class Movie {
     synopsis: string;
     actors: People[];
 
+    dislikeCount: number;
+    likeCount: number;
+
     constructor(title, releaseDate, synopsis) {
         this.title= title;
         this.releaseDate= releaseDate;
