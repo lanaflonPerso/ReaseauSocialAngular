@@ -6,11 +6,11 @@
   
     <div class="vote_btns">
   
-    	<form action="" method="post">
+    	<form [formGroup]="likeForm" (ngSubmit)="onLike()">
     		<button type="submit" class="vote_btn vote_like"><i class="fa fa-thumbs-up">{{ likeCount }}</i></button>
     	</form>		
   
-    	<form action="" method="post">
+    	<form [formGroup]="dislikeForm" (ngSubmit)="onDislike()">
     		<button type="submit" class="vote_btn vote_dislike"><i class="fa fa-thumbs-down">{{ dislikeCount }}</i></button>
     	</form>
   

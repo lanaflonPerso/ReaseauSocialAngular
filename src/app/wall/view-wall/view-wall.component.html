@@ -1,0 +1,11 @@
+<div class="row">
+	<div class="col-md-8">
+		<form [formGroup]="shForm" (ngSubmit)="onSubmit()">
+			<div class="form-group">
+				<label for="html">Message: </label>
+				<input type="text" id="html" class="form-control" formControlName="html">
+			</div>
+			<button class="btn btn-primary" type="submit" [disabled]="shForm.invalid">Envoyer</button>
+		</form>
+	</div>
+</div>

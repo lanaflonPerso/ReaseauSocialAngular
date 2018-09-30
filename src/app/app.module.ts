@@ -7,6 +7,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { BooksService } from './services/books.service';
+import { WallService } from './services/wall.service';
 
 import { AppComponent } from './app.component';
 import { SignupComponent } from './auth/signup/signup.component';
@@ -16,11 +17,17 @@ import { SingleBookComponent } from './book-list/single-book/single-book.compone
 import { BookFormComponent } from './book-list/book-form/book-form.component';
 import { HeaderComponent } from './header/header.component';
 import { AddMovieComponent } from './movie/add-movie/add-movie.component';
-import { AddPeopleComponent } from './people/add-people/add-people.component';
 import { PeopleService } from './services/people.service';
 import { MovieService } from './services/movie.service';
 import { ViewMovieComponent } from './movie/view-movie/view-movie.component';
 import { ViewLikeComponent } from './like/view-like/view-like.component';
+
+// **********************************WALL************************************//
+import { ViewWallComponent } from './wall/view-wall/view-wall.component';
+
+// **********************************PEOPLE**********************************//
+import { AddPeopleComponent } from './people/add-people/add-people.component';
+
 
 const appRoutes: Routes = [
   { path: 'auth/signup', component: SignupComponent },
@@ -32,7 +39,12 @@ const appRoutes: Routes = [
   { path: 'movies/add', component: AddMovieComponent },
   { path: 'movies/:id', component: ViewMovieComponent },
 
-	{ path: 'peoples/add', component: AddPeopleComponent }
+  // **********************************PEOPLE**********************************//
+  { path: 'peoples/add/:type/:id', component: AddPeopleComponent },
+  { path: 'peoples/add', component: AddPeopleComponent },
+
+  // **********************************WALL**********************************//
+  { path: 'wall', component: ViewWallComponent },
 
 
 
@@ -50,7 +62,8 @@ const appRoutes: Routes = [
     AddMovieComponent,
     AddPeopleComponent,
     ViewMovieComponent,
-    ViewLikeComponent
+    ViewLikeComponent,
+    ViewWallComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +77,7 @@ const appRoutes: Routes = [
     BooksService,
     PeopleService,
     MovieService,
+    WallService,
     AuthGuardService
   ],
   bootstrap: [AppComponent]
