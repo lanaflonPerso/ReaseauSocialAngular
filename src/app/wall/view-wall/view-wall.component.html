@@ -8,4 +8,24 @@
 			<button class="btn btn-primary" type="submit" [disabled]="shForm.invalid">Envoyer</button>
 		</form>
 	</div>
+
+	<div class="col-md-12" *ngFor="let brick of bricks">
+
+		<p>{{ brick.user.firstName }} {{ brick.user.lastName }} {{ brick.html }}</p>
+		<p>{{ brick.html }}</p>
+
+		<div *ngIf="viewMessage">
+			<p>on voit les messages</p>
+		</div>
+
+		<footer class="footerMessage">
+			<span>{{ brick.createdDate | date }}</span>
+			<span>{{brick.id }}</span>
+
+			<ul>
+				<li><a (click)="onViewMessage()">{{ brick.comments.length }} Commentaire</a></li>
+			</ul>
+		</footer>
+		<hr>
+	</div>
 </div>

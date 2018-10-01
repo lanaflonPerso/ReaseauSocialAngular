@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { WallService } from '../../services/wall.service';
+import { Wall } from '../../models/wall.model';
 
 @Component({
 	selector: 'app-view-wall',
@@ -9,6 +10,8 @@ import { WallService } from '../../services/wall.service';
 })
 export class ViewWallComponent implements OnInit {
 
+	viewMessage: boolean= false;
+	bricks: Wall[];
 	shForm: FormGroup;
 
 	constructor(private formBuilder: FormBuilder,
@@ -19,6 +22,12 @@ export class ViewWallComponent implements OnInit {
 	}
 
 	initForm() {
+		this.wallService.getWall().then(
+			(walls: Wall[]) => {
+				this.bricks= walls;
+			}
+		)
+		this.wallService.getWall();
 		this.shForm= this.formBuilder.group({
 			html: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]]
 		});
@@ -27,5 +36,9 @@ export class ViewWallComponent implements OnInit {
 	onSubmit() {
 		const html= this.shForm.get('html').value;
 		this.wallService.addSh(html);
+	}
+
+	onViewMessage() {
+		this.viewMessage= true;
 	}
 }

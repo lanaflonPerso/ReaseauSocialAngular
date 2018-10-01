@@ -24,6 +24,7 @@ import { ViewLikeComponent } from './like/view-like/view-like.component';
 
 // **********************************WALL************************************//
 import { ViewWallComponent } from './wall/view-wall/view-wall.component';
+import { AddCommentComponent } from './wall/add-comment/add-comment.component';
 
 // **********************************PEOPLE**********************************//
 import { AddPeopleComponent } from './people/add-people/add-people.component';
@@ -45,9 +46,7 @@ const appRoutes: Routes = [
 
   // **********************************WALL**********************************//
   { path: 'wall', component: ViewWallComponent },
-
-
-
+  { path: 'wall/comment', component: AddCommentComponent }
 ];
 
 @NgModule({
@@ -64,6 +63,7 @@ const appRoutes: Routes = [
     ViewMovieComponent,
     ViewLikeComponent,
     ViewWallComponent,
+    AddCommentComponent
   ],
   imports: [
     BrowserModule,
