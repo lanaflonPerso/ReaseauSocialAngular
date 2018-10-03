@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Movie } from '../../models/movie.models';
+import { People } from '../../models/people.models';
 
 @Component({
   selector: 'app-add-movie',
@@ -15,8 +15,9 @@ export class AddMovieComponent implements OnInit {
   movieForm: FormGroup;
   errorMessage: string;
 
+
   constructor(
-    private movieServie: MovieService,
+    private movieService: MovieService,
     private formBuilder: FormBuilder,
     private router: Router
   ) { }
@@ -30,18 +31,28 @@ export class AddMovieComponent implements OnInit {
       title: ['', Validators.required],
       releaseDate: ['', [Validators.required ,Validators.min(1900), Validators.max(this.now.getFullYear())]],
       picture: [''],
-      synopsis: ['']
+      synopsis: [''],
+      actors: this.formBuilder.array([])
     });
   }
 
-  onSubmit() {
-    const formValue= this.movieForm.value;
-    const newMovie= new Movie(
-      formValue['title'],
-      formValue['releaseDate'],
-      formValue['synopsis']
-	);
-	newMovie.picture= formValue['picture'];
-    this.movieServie.addMovie(newMovie);
-  }
+	onSubmit() {
+		const title= this.movieForm.get('title').value;
+		const releaseDate= this.movieForm.get('releaseDate').value;
+		const picture= this.movieForm.get('picture').value;
+		const synopsis= this.movieForm.get('synopsis').value;
+		this.movieService.addMovie(title, releaseDate, picture, synopsis);
+	}
+
+	getActors() {
+		return this.movieForm.get('actors') as FormArray;
+	}
+	
+	onAddActor() {
+		const firstName= this.formBuilder.control('', Validators.required);
+		const lastName= this.formBuilder.control('', Validators.required);
+		const birthDay= this.formBuilder.control('', Validators.required);
+		let people= new People(firstName, lastName, birthDay);
+		this.getActors().push(firstName);
+	}
 }

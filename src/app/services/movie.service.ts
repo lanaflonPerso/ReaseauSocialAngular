@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Movie } from '../models/movie.models';
 import { Subject } from "rxjs";
+import { URL } from '../config/app.const';
 
 @Injectable({
     providedIn: 'root'
@@ -10,8 +11,9 @@ import { Subject } from "rxjs";
 
     movie: Movie;
     private movies= [];
-
+    url= URL;
     movieSubject= new Subject<any[]>();
+    headers: string;
 
     constructor(private httpClient: HttpClient) { }
 
@@ -20,14 +22,12 @@ import { Subject } from "rxjs";
     }
 
     getMovieById(id: number) {
-        let url= "http://localhost:9090/movies/"+id;
         return new Promise(
             (resolve, reject) => {
                 this.httpClient
-                .get<Movie>(url)
+                .get<Movie>(this.url+"/movies/"+id)
                 .subscribe(
                     (data) => {
-                        console.log(data);
                         resolve(data);
                     },
                     (error) => {
@@ -38,16 +38,17 @@ import { Subject } from "rxjs";
         );
     }
 
-    addMovie(movie: Movie){
-        console.log(movie);
-        let url = "http://localhost:9090/movies/add";
-        this.httpClient.post(url, this.movie).subscribe(
-            ()=> {
-                console.log('Enregistrement terminé!');
-            },
+    addMovie(title: string, releaseDate: number, picture: string, synopsis: string){
+        let url = this.url+"/movies/add";
+        this.movie= new Movie(title, releaseDate, picture, synopsis);
+        this.httpClient.post(url, this.movie, {observe: 'response'}).subscribe(
+            (e) => {
+                console.log(e);
+                console.log('headers: ' + e.headers.get('location'));
+              },
             (error)=> {
                 console.log('Erreur de sauvegarde!'+ error);
             }
         );
     }
-  }
+}

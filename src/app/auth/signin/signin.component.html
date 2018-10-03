@@ -1,3 +1,20 @@
-<p>
-  signin works!
-</p>
+<div class="row">
+  <div class="col-md-8 md-offset-2">
+    <h2>Connexion</h2>
+    <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">Email: </label>
+          <input type="text" id="email" class="form-control" formControlName="email">
+        </div>
+
+        <div class="form-group">
+          <label for="password">password</label>
+          <input type="password" class="form-control" id="password" formControlName="password">
+        </div>
+
+        <button class="btn btn-primary" type="submit" [disabled]="signInForm.invalid">Connexion</button>
+    </form>
+    <p class="text-danger">{{ errorMessage }}</p>
+  </div>
+</div>
+

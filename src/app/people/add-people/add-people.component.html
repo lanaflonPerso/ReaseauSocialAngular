@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-md-8 md-offset-2">
+      <h2>Ajout d'une personnalité</h2>
+      <form [formGroup]="peopleForm" (ngSubmit)="onSubmit()">
+  
+          <div class="form-group">
+            <label for="firstName">Prénom: </label>
+            <input type="text" id="firstName" class="form-control" formControlName="firstName">
+          </div>
+  
+          <div class="form-group">
+            <label for="lastName">Nom: </label>
+            <input type="text" id="lastName" class="form-control" formControlName="lastName">
+          </div>
+  
+          <div class="form-group">
+            <label for="birthday">Date de naissance</label>
+            <input type="text" class="form-control" id="birthday" formControlName="birthday" pattern="[0-9]{4}">
+          </div>
+
+          <button class="btn btn-primary" type="submit" [disabled]="peopleForm.invalid">Enregistrer</button>
+      </form>
+      <p class="text-danger">{{ errorMessage }}</p>
+    </div>
+  </div>

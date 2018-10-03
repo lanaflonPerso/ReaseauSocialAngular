@@ -28,6 +28,11 @@ import { AddCommentComponent } from './wall/add-comment/add-comment.component';
 
 // **********************************PEOPLE**********************************//
 import { AddPeopleComponent } from './people/add-people/add-people.component';
+import { ViewPeopleComponent } from './people/view-people/view-people.component';
+
+// **********************************MUSIC***********************************//
+import { AddAlbumComponent } from './music/add-album/add-album.component';
+
 
 
 const appRoutes: Routes = [
@@ -43,10 +48,14 @@ const appRoutes: Routes = [
   // **********************************PEOPLE**********************************//
   { path: 'peoples/add/:type/:id', component: AddPeopleComponent },
   { path: 'peoples/add', component: AddPeopleComponent },
+  { path: 'peoples/:id', component: ViewPeopleComponent },
 
   // **********************************WALL**********************************//
   { path: 'wall', component: ViewWallComponent },
-  { path: 'wall/comment', component: AddCommentComponent }
+  { path: 'wall/:id', component: AddCommentComponent },
+
+  // **********************************WALL**********************************//
+  { path: 'album/add', component: AddAlbumComponent }
 ];
 
 @NgModule({
@@ -63,7 +72,9 @@ const appRoutes: Routes = [
     ViewMovieComponent,
     ViewLikeComponent,
     ViewWallComponent,
-    AddCommentComponent
+    AddCommentComponent,
+    ViewPeopleComponent,
+    AddAlbumComponent
   ],
   imports: [
     BrowserModule,

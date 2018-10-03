@@ -2,9 +2,20 @@
   <div class="col-md-8 md-offset-2">
     <h2>Créer un compte</h2>
     <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+      
+        <div class="form-group">
+          <label for="firstName">Prénom: </label>
+          <input type="text" id="firstName" class="form-control" formControlName="firstName">
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Nom: </label>
+          <input type="text" id="lastName" class="form-control" formControlName="lastName">
+        </div>
+
         <div class="form-group">
           <label for="email">Email: </label>
-          <input type="text" id="email" class="form-control" formControlName="email">
+          <input type="email" id="email" class="form-control" formControlName="email">
         </div>
 
         <div class="form-group">
@@ -14,9 +25,7 @@
 
         <button class="btn btn-primary" type="submit" [disabled]="signUpForm.invalid">Créer mon compte</button>
     </form>
-    <p class="text-danger">{{ errorMassage }}</p>
-
+    <p class="text-danger">{{ errorMessage }}</p>
   </div>
-
 </div>
 

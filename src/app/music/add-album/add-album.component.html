@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-md-8">
+    <h2>Ajout d'un album</h2>
+
+    <form [formGroup]="albumForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="group">Groupe:</label>
+          <input type="text" id="group" class="form-control" formControlName="group" #box (keyup)="searchGroup(box.value)">
+        </div>
+        <ul>
+          <li *ngFor="let group of groups; index as i"><a (click)="SelectGroup(i)">{{ group.bandName }}</a></li>
+        </ul>
+
+      <div class="form-group">
+        <label for="title">Titre:</label>
+        <input type="text" id="title" class="form-control" formControlName="title">
+      </div>
+
+      <div class="form-group">
+        <label for="releaseDate">Date de sortie:</label>
+        <input type="text" id="releaseDate" class="form-control" formControlName="releaseDate">
+      </div>
+
+      <button class="btn btn-primary" type="submit" [disabled]="albumForm.invalid">Enregistrer</button>
+
+    </form>
+
+  </div>
+</div>

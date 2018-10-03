@@ -23,7 +23,7 @@
 			<span>{{brick.id }}</span>
 
 			<ul>
-				<li><a (click)="onViewMessage()">{{ brick.comments.length }} Commentaire</a></li>
+				<li><a [routerLink]="['/wall', brick.id]">{{ brick.comments.length }} Commentaire</a></li>
 			</ul>
 		</footer>
 		<hr>

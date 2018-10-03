@@ -2,25 +2,23 @@
 	<a class="navbar-brand" routerLink="/">Réseau Social</a>
 
 	<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-		<li routerLinkActive="active">
-			<a class="nav-link" routerLink="books">Livres</a>
-		</li>
-		<li routerLinkActive="active">
-			<a class="nav-link" routerLink="books">Livres</a>
-		</li>
-
+		
 		<li routerLinkActive="active">
 			<a class="nav-link" routerLink="wall">Mur</a>
 		</li>
+
 	</ul>
 
 	<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
 		<li routerLinkActive="active">
-			<a class="nav-link" routerLink="auth/signup">Créer un compte</a>
+			<a class="nav-link" routerLink="auth/signup">Créer un compte ||{{ isAuth }}||</a>
 		</li>
+
 		<li routerLinkActive="active">
 			<a class="nav-link" routerLink="auth/signin">Connexion</a>
 		</li>
+		
 	</ul>
 	
 </nav>

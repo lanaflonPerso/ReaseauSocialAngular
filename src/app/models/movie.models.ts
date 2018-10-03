@@ -12,9 +12,10 @@ export class Movie {
     dislikeCount: number;
     likeCount: number;
 
-    constructor(title, releaseDate, synopsis) {
+    constructor(title, releaseDate, picture, synopsis) {
         this.title= title;
         this.releaseDate= releaseDate;
+        this.picture= picture;
         this.synopsis= synopsis;
     }
 }

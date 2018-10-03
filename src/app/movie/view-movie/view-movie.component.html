@@ -6,9 +6,17 @@
     <div class="col-md-7">
         <h1>{{ movie.title }} {{ movie.releaseDate }}</h1>
 
-        <app-view-like [dislikeCount]="movie.dislikeCount" [likeCount]="movie.likeCount" [progressBar]="progressBar"></app-view-like>
+        <app-view-like [dislikeCount]="movie.dislikeCount" [likeCount]="movie.likeCount" [progressBar]="progressBar" [id]="movie.id"></app-view-like>
 
         <p>{{ movie.synopsis }}</p>
-    </div>
 
+        <div formArrayName="actors">
+            <h3>Actors</h3>
+            <div class="form-group" *ngFor="let actor of movie.actors">
+               <p><a routerLink="/peoples/{{ actor.id }}">{{ actor.firstName }} {{ actor.lastName }}</a></p>
+            </div>
+            
+            <button type="button" class="btn btn-success" (click)="onAddActor()">Ajouter un acteur</button>
+        </div>
+    </div>
 </div>

@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MovieService } from '../../services/movie.service'
 import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from '../../models/movie.models';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-view-movie',
@@ -20,7 +19,7 @@ export class ViewMovieComponent implements OnInit {
 				private router: Router) { }
 
 	ngOnInit() {
-		this.movie= new Movie('', '', '');
+		this.movie= new Movie('', '', '', '');
 		const id= this.route.snapshot.params['id'];
 		this.movieService.getMovieById(+id).then(
 			(movie: Movie) => {

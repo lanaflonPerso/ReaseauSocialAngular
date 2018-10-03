@@ -1,12 +1,14 @@
-import { People } from '../models/people.models'
-import { User } from '../models/User.model'
+import { People } from '../models/people.models';
+import { User } from '../models/User.model';
+
 export class Comment {
     id: number;
-    contenu: string;
-    createDate: Date;
+    content: string;
+    createdDate: Date;
+    brick_id: number;
 
-    constructor(id, contenu) {
-        this.id= id;
-        this.contenu= contenu;
+    constructor(contenu, createdDate) {
+        this.content= contenu;
+        this.createdDate= createdDate;
     }
 }
