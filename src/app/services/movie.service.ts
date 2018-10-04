@@ -11,7 +11,6 @@ import { URL } from '../config/app.const';
 
     movie: Movie;
     private movies= [];
-    url= URL;
     movieSubject= new Subject<any[]>();
     headers: string;
 
@@ -25,7 +24,7 @@ import { URL } from '../config/app.const';
         return new Promise(
             (resolve, reject) => {
                 this.httpClient
-                .get<Movie>(this.url+"/movies/"+id)
+                .get<Movie>(URL+"/movies/"+id)
                 .subscribe(
                     (data) => {
                         resolve(data);
@@ -39,12 +38,11 @@ import { URL } from '../config/app.const';
     }
 
     addMovie(title: string, releaseDate: number, picture: string, synopsis: string){
-        let url = this.url+"/movies/add";
         this.movie= new Movie(title, releaseDate, picture, synopsis);
-        this.httpClient.post(url, this.movie, {observe: 'response'}).subscribe(
+        this.httpClient.post(URL+"/movies/add", this.movie, {observe: 'response'}).subscribe(
             (e) => {
                 console.log(e);
-                console.log('headers: ' + e.headers.get('location'));
+                console.log('headers: ' + e.headers.get('Custom-Header'));
               },
             (error)=> {
                 console.log('Erreur de sauvegarde!'+ error);

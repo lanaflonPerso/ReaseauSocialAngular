@@ -32,6 +32,7 @@ import { ViewPeopleComponent } from './people/view-people/view-people.component'
 
 // **********************************MUSIC***********************************//
 import { AddAlbumComponent } from './music/add-album/add-album.component';
+import { ViewAlbumComponent } from './music/view-album/view-album.component';
 
 
 
@@ -54,8 +55,9 @@ const appRoutes: Routes = [
   { path: 'wall', component: ViewWallComponent },
   { path: 'wall/:id', component: AddCommentComponent },
 
-  // **********************************WALL**********************************//
-  { path: 'album/add', component: AddAlbumComponent }
+  // **********************************Music**********************************//
+  { path: 'album/add', component: AddAlbumComponent },
+  { path: 'album/view/:id', component: ViewAlbumComponent }
 ];
 
 @NgModule({
@@ -74,7 +76,8 @@ const appRoutes: Routes = [
     ViewWallComponent,
     AddCommentComponent,
     ViewPeopleComponent,
-    AddAlbumComponent
+    AddAlbumComponent,
+    ViewAlbumComponent
   ],
   imports: [
     BrowserModule,

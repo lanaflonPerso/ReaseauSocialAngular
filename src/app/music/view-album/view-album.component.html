@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-md-5">
+    <img class="img-fluid" [src]="album.picture" [alt]="album.picture">
+  </div>
+
+  <div class="col-md-7">
+    <h1>
+      {{ album.group.bandName }} - {{ album.title }} ({{ album.releaseDate }})
+      <i class="far fa-save" (click)="onSubmit()" *ngIf="isModified"></i>
+    </h1>
+
+    <app-view-like [dislikeCount]="album.dislikeCount" [likeCount]="album.likeCount" [progressBar]="progressBar" [id]="album.id"></app-view-like>
+
+    <p>{{ album.description }}</p>
+
+    <div>
+      <h3>Titres <i class="fas fa-plus" (click)="onFormAddSong()"></i></h3>
+
+      <form class="form-inline" *ngIf="viewFormAddSong" [formGroup]="songForm" (ngSubmit)="onSubmitAddSong()">
+        <div class="form-group mr-2">
+          <label for="title">Titre:</label>
+          <input type="text" class="form-control" id="title" formControlName="title">
+        </div>
+
+        <button type="submit" class="btn btn-primary mb-2">Enregistrer</button>
+      </form>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let song of album.songs;index as i">
+          {{ song.title }} <i class="fas fa-minus float-right" (click)="onSubmitDeleteSong(i)"></i>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div>
