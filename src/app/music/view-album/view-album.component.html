@@ -5,13 +5,20 @@
 
   <div class="col-md-7">
     <h1>
-      {{ album.group.bandName }} - {{ album.title }} ({{ album.releaseDate }})
-      <i class="far fa-save" (click)="onSubmit()" *ngIf="isModified"></i>
+      {{ album.group.bandName }} - {{ album.title }} ({{ album.releaseDate }}) <i class="fas fa-pencil-alt"></i>
+      <button class="btn btn-danger" (click)="onSubmit()" *ngIf="isModified"><i class=" far fa-save"></i> Enregistrer</button>
     </h1>
 
     <app-view-like [dislikeCount]="album.dislikeCount" [likeCount]="album.likeCount" [progressBar]="progressBar" [id]="album.id"></app-view-like>
 
-    <p>{{ album.description }}</p>
+    <div>
+      <h3>Description <i class="fas fa-pencil-alt" (click)="onUpdateDescription()"></i></h3>
+      <p *ngIf="!viewFormUpdateDescription">{{ album.description }}</p>
+      <form class="form-group" *ngIf="viewFormUpdateDescription" [formGroup]="descriptionForm" (ngSubmit)="onSubmitUpdateDescription()">
+        <textarea rows="5" class="form-control" id="desciption" formControlName="description"></textarea>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+      </form>
+    </div>
 
     <div>
       <h3>Titres <i class="fas fa-plus" (click)="onFormAddSong()"></i></h3>
@@ -29,7 +36,6 @@
           {{ song.title }} <i class="fas fa-minus float-right" (click)="onSubmitDeleteSong(i)"></i>
         </li>
       </ul>
-
     </div>
   </div>
 </div>

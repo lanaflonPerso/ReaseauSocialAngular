@@ -19,8 +19,10 @@ export class ViewAlbumComponent implements OnInit {
   progressBar: String;
   countLike: number;
 
+  viewFormUpdateDescription: boolean= false;
   viewFormAddSong: boolean= false;
   songForm: FormGroup;
+  descriptionForm: FormGroup;
   
   constructor(private musicService: MusicService,
               private route: ActivatedRoute,
@@ -48,6 +50,14 @@ export class ViewAlbumComponent implements OnInit {
     this.viewFormAddSong= true;
   }
 
+  onSubmitUpdateDescription(){
+    if(this.album.description !== this.descriptionForm.get('description').value) {
+      this.album.description= this.descriptionForm.get('description').value;
+      this.isModified= true;
+    }
+    this.viewFormUpdateDescription= false;
+  }
+
   onSubmitDeleteSong(i) {
     this.album.songs.splice(i, 1);
     this.isModified= true;
@@ -59,6 +69,13 @@ export class ViewAlbumComponent implements OnInit {
     let song= new Song(number, title);
     this.album.songs.push(song);
     this.isModified= true;
+  }
+
+  onUpdateDescription(){
+    this.viewFormUpdateDescription= true;
+    this.descriptionForm= this.formBuilder.group({
+      description: [this.album.description, Validators.required]
+    })
   }
 
   onSubmit() {
