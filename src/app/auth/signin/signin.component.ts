@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -10,8 +10,10 @@ import { Router } from '@angular/router';
 })
 export class SigninComponent implements OnInit {
 
-  @Input() isAuth: boolean;
   signInForm: FormGroup;
+  loading:boolean= false;
+  submitted:boolean= false;
+
   errorMessage: string;
 
 
@@ -25,16 +27,23 @@ export class SigninComponent implements OnInit {
     this.initForm()
   }
 
+  get f() {
+    return this.signInForm.controls;
+  }
+
   initForm() {
     this.signInForm= this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]]
+      email: ['vianneyba@free.fr', [Validators.required, Validators.email]],
+      password: ['azerty', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]]
     });
   }
+
   onSubmit() {
+    this.submitted= true;
+
     const email= this.signInForm.get('email').value;
     const password= this.signInForm.get('password').value;
-    this.authService.signInUser(email, password).then(
+    this.authService.signIn(email, password).then(
       () => {
         this.router.navigate(['/wall']);
       },

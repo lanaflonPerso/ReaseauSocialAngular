@@ -10,17 +10,13 @@ import { BooksService } from './services/books.service';
 import { WallService } from './services/wall.service';
 
 import { AppComponent } from './app.component';
-import { SignupComponent } from './auth/signup/signup.component';
-import { SigninComponent } from './auth/signin/signin.component';
-import { BookListComponent } from './book-list/book-list.component';
-import { SingleBookComponent } from './book-list/single-book/single-book.component';
-import { BookFormComponent } from './book-list/book-form/book-form.component';
 import { HeaderComponent } from './header/header.component';
-import { AddMovieComponent } from './movie/add-movie/add-movie.component';
 import { PeopleService } from './services/people.service';
-import { MovieService } from './services/movie.service';
 import { ViewMovieComponent } from './movie/view-movie/view-movie.component';
 import { ViewLikeComponent } from './like/view-like/view-like.component';
+// **********************************UTILISATEUR*******************************//
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
 
 // **********************************WALL************************************//
 import { ViewWallComponent } from './wall/view-wall/view-wall.component';
@@ -34,16 +30,18 @@ import { ViewPeopleComponent } from './people/view-people/view-people.component'
 import { AddAlbumComponent } from './music/add-album/add-album.component';
 import { ViewAlbumComponent } from './music/view-album/view-album.component';
 
-
+// **********************************MOVIE************************************//
+import { MovieService } from './services/movie.service';
+import { AddMovieComponent } from './movie/add-movie/add-movie.component';
 
 const appRoutes: Routes = [
+  { path: 'auth/ok', component: AppComponent },
+  // **********************************UTILISATEUR*******************************//
   { path: 'auth/signup', component: SignupComponent },
   { path: 'auth/signin', component: SigninComponent },
-  { path: 'books', component: BookListComponent },
-  { path: 'books/new', component: BookFormComponent },
-  { path: 'books/view/:id', component: SingleBookComponent },
 
-  { path: 'movies/add', component: AddMovieComponent },
+  // **********************************MOVIE************************************//
+  { path: 'movies/add', component: AddMovieComponent, canActivate: [AuthGuardService] },
   { path: 'movies/:id', component: ViewMovieComponent },
 
   // **********************************PEOPLE**********************************//
@@ -51,13 +49,15 @@ const appRoutes: Routes = [
   { path: 'peoples/add', component: AddPeopleComponent },
   { path: 'peoples/:id', component: ViewPeopleComponent },
 
-  // **********************************WALL**********************************//
+  // **********************************WALL***********************************//
   { path: 'wall', component: ViewWallComponent },
   { path: 'wall/:id', component: AddCommentComponent },
 
   // **********************************Music**********************************//
   { path: 'album/add', component: AddAlbumComponent },
-  { path: 'album/view/:id', component: ViewAlbumComponent }
+  { path: 'album/view/:id', component: ViewAlbumComponent },
+
+  { path: '', redirectTo: '/wall', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -65,9 +65,6 @@ const appRoutes: Routes = [
     AppComponent,
     SignupComponent,
     SigninComponent,
-    BookListComponent,
-    SingleBookComponent,
-    BookFormComponent,
     HeaderComponent,
     AddMovieComponent,
     AddPeopleComponent,

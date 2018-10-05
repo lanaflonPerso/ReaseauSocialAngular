@@ -1,4 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { User } from '../models/User.model';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -8,11 +12,33 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() isAuth: boolean;
+  userSubscription: Subscription;
+  currentUser: User;
+  isAuth: boolean= false;
 
-  constructor() { }
+  constructor(private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit() {
+
+    this.userSubscription= this.authService.userSubject.subscribe(
+      (user: User) => {
+        this.currentUser= user;
+        console.log(user);
+      }
+    );
+    this.authService.emitUserSubject();
+
+  //  this.currentUser= JSON.parse(localStorage.getItem('currentUser'));
+  //  if(this.currentUser != null) {
+  //    this.isAuth= true
+   // }
   }
 
+  signOut(){
+    localStorage.removeItem('currentUser');
+    this.isAuth= false;
+    this.authService.signOut();
+    this.router.navigate(['/auth/signin']);
+  }
 }
