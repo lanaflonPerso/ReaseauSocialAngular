@@ -48,6 +48,18 @@ export class MovieService {
     );
   }
 
+  updateMovie(movie: Movie) {
+    console.log(movie);
+    this.http.post(URL+"/movie/update", movie).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log('erreur de sauvegarde!'+ error);
+      }
+    )
+  }
+
   searchMovies(title: string) {
     return new Promise(
       (resolve, reject) => {

@@ -1,22 +1,45 @@
 <div class="row">
-    <div class="col-md-5">
-        <img class="img-fluid" src="{{ movie.picture }}" alt="{{ movie.title }}">
-    </div>
+	<div class="col-md-5">
+		<img class="img-fluid" [src]="movie.picture" [alt]="movie.title">
+	</div>
 
-    <div class="col-md-7">
-        <h1>{{ movie.title }} {{ movie.releaseDate }}</h1>
+	<div class="col-md-7">
+		<h1>
+			{{ movie.title }} {{ movie.releaseDate }}
+			<i class="fas fa-pencil-alt" *ngIf="currentUser !=null"></i>
+			<button class="btn btn-danger" (click)="onSubmit()" *ngIf="isModified"><i class=" far fa-save"></i> Enregistrer</button>
+		</h1>
 
-        <app-view-like [dislikeCount]="movie.dislikeCount" [likeCount]="movie.likeCount" [progressBar]="progressBar" [id]="movie.id"></app-view-like>
+		<app-view-like [dislikeCount]="movie.dislikeCount" [likeCount]="movie.likeCount" [progressBar]="progressBar" [id]="movie.id"></app-view-like>
 
-        <p>{{ movie.synopsis }}</p>
+		<div class="col-md-12">
+			<h3>Synopsis <i class="fas fa-pencil-alt" *ngIf="currentUser !=null" (click)="onUpdateSynopsis()"></i></h3>
+			<p *ngIf="!viewFormUpdateSynopsis">{{ movie.synopsis }}</p>
+			<form class="form-group" *ngIf="viewFormUpdateSynopsis" [formGroup]="synopsisFrom" (ngSubmit)="onSubmitUpdateSynopsis()">
+				<textarea rows="5" class="form-control" id="synopsis" formControlName="synopsis"></textarea>
+				<button class="btn btn-primary">Enregistrer</button>
+			</form>
+		</div>
 
-        <div formArrayName="actors">
-            <h3>Actors</h3>
-            <div class="form-group" *ngFor="let actor of movie.actors">
-               <p><a routerLink="/peoples/{{ actor.id }}">{{ actor.firstName }} {{ actor.lastName }}</a></p>
-            </div>
-            
-            <button type="button" class="btn btn-success" (click)="onAddActor()">Ajouter un acteur</button>
-        </div>
-    </div>
+		<div class=col-md-12>
+			<h3>Acteurs <i class="fas fa-plus" *ngIf="currentUser !=null" (click)="onFormActor()"></i></h3>
+
+			<form class="form-inline" *ngIf="viewFormActor" [formGroup]="actorForm" (ngSubmit)="onSubmitActor()">
+				<div class="form-group mr-2">
+					<input type="text" class="form-control" id="firstName" formControlName="firstName" placeholder="Prénom" />
+				</div>
+
+				<div class="form-group mr-2">
+						<input type="text" class="form-control" id="lastName" formControlName="lastName" placeholder="nom" />
+				</div>
+
+				<button class="btn btn-primary mb-2">Enregistre</button>
+			</form>
+
+			<ul class="list-group">
+				<li class="list-group-item" *ngFor="let actor of movie.actors"><a routerLink="/peoples/{{ actor.id }}">{{ actor.firstName }} {{ actor.lastName }}</a></li>
+			</ul>
+
+		</div>
+	</div>
 </div>

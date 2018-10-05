@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-5">
-    <img class="img-fluid" [src]="album.picture" [alt]="album.picture">
+    <img class="img-fluid" [src]="album.picture" [alt]="album.title">
   </div>
 
   <div class="col-md-7">
@@ -16,7 +16,7 @@
       <p *ngIf="!viewFormUpdateDescription">{{ album.description }}</p>
       <form class="form-group" *ngIf="viewFormUpdateDescription" [formGroup]="descriptionForm" (ngSubmit)="onSubmitUpdateDescription()">
         <textarea rows="5" class="form-control" id="desciption" formControlName="description"></textarea>
-        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        <button class="btn btn-primary">Enregistrer</button>
       </form>
     </div>
 
@@ -29,7 +29,7 @@
           <input type="text" class="form-control" id="title" formControlName="title">
         </div>
 
-        <button type="submit" class="btn btn-primary mb-2">Enregistrer</button>
+        <button class="btn btn-primary mb-2">Enregistrer</button>
       </form>
       <ul class="list-group">
         <li class="list-group-item" *ngFor="let song of album.songs;index as i">
