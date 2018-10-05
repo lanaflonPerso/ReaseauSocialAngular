@@ -7,25 +7,20 @@
 		</li>
 	</ul>
 
-
-	<form class="form-inline my-2 my-lg-0">
-		<input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Recherche" />
-		<button class="btn btn-outline-sucess my-2 my-sm-0"><i class="fas fa-search"></i></button>
-	</form>
-
 	<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 		<li routerLinkActive="active" *ngIf="currentUser == null">
 			<a class="nav-link" routerLink="auth/signup"><i class="fas fa-user-plus"></i></a>
 		</li>
-
+		
 		<li routerLinkActive="active" *ngIf="currentUser == null">
 			<a class="nav-link" routerLink="auth/signin">Connexion</a>
 		</li>
-
+		
 		<li *ngIf="currentUser != null">
 			<a class="nav-link">{{ currentUser?.firstName }} {{ currentUser?.lastName }} <i (click)="signOut()" class="fas fa-sign-out-alt"></i></a>
 		</li>
 		
+		<a routerLink="search"><button class="btn btn-outline-sucess my-2 my-sm-0"><i class="fas fa-search"></i></button></a>
 	</ul>
 	
 </nav>

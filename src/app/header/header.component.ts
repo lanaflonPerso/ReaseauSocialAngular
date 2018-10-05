@@ -3,6 +3,9 @@ import { User } from '../models/User.model';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { MovieService } from '../services/movie.service';
+import { Movie } from '../models/movie.models';
 
 
 @Component({
@@ -14,13 +17,12 @@ export class HeaderComponent implements OnInit {
 
   userSubscription: Subscription;
   currentUser: User;
-  isAuth: boolean= false;
+
 
   constructor(private authService: AuthService,
-    private router: Router) { }
+              private router: Router) { }
 
   ngOnInit() {
-
     this.userSubscription= this.authService.userSubject.subscribe(
       (user: User) => {
         this.currentUser= user;
@@ -28,16 +30,10 @@ export class HeaderComponent implements OnInit {
       }
     );
     this.authService.emitUserSubject();
-
-  //  this.currentUser= JSON.parse(localStorage.getItem('currentUser'));
-  //  if(this.currentUser != null) {
-  //    this.isAuth= true
-   // }
   }
 
   signOut(){
     localStorage.removeItem('currentUser');
-    this.isAuth= false;
     this.authService.signOut();
     this.router.navigate(['/auth/signin']);
   }

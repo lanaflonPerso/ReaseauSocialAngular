@@ -34,8 +34,11 @@ import { ViewAlbumComponent } from './music/view-album/view-album.component';
 import { MovieService } from './services/movie.service';
 import { AddMovieComponent } from './movie/add-movie/add-movie.component';
 
+// **********************************Autre************************************//
+import { SearchComponent } from './other/search/search.component';
+
 const appRoutes: Routes = [
-  { path: 'auth/ok', component: AppComponent },
+  
   // **********************************UTILISATEUR*******************************//
   { path: 'auth/signup', component: SignupComponent },
   { path: 'auth/signin', component: SigninComponent },
@@ -57,6 +60,7 @@ const appRoutes: Routes = [
   { path: 'album/add', component: AddAlbumComponent },
   { path: 'album/view/:id', component: ViewAlbumComponent },
 
+  { path: 'search', component: SearchComponent },
   { path: '', redirectTo: '/wall', pathMatch: 'full' }
 ];
 
@@ -74,7 +78,8 @@ const appRoutes: Routes = [
     AddCommentComponent,
     ViewPeopleComponent,
     AddAlbumComponent,
-    ViewAlbumComponent
+    ViewAlbumComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
