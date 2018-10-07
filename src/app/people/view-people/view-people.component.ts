@@ -6,6 +6,8 @@ import { People } from '../../models/people.models';
 import { ActivatedRoute } from '@angular/router';
 import { PeopleService } from '../../services/people.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { LikeService } from '../../services/like.service';
+import { LikeDislike } from '../../models/like.dislike.model';
 
 @Component({
   selector: 'app-view-people',
@@ -13,6 +15,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./view-people.component.scss']
 })
 export class ViewPeopleComponent implements OnInit {
+
+  id:number= this.route.snapshot.params['id'];
 
   currentUser:User;
   userSubscription:Subscription;
@@ -33,16 +37,20 @@ export class ViewPeopleComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.people= new People('', '', '');
+
     this.userSubscription= this.authService.userSubject.subscribe(
 			(user: User) => {
 			  this.currentUser= user;
 			}
 		);
     this.authService.emitUserSubject();
-    
-    this.people= new People('', '', '');
-    const id= this.route.snapshot.params['id'];
-    this.peopleService.getById(id).then(
+    this.getPeople();
+  }
+
+  getPeople() {
+  
+    this.peopleService.getById(this.id).then(
       (people: People) => {
         this.people= people;
         this.countLike= this.people.dislikeCount+this.people.likeCount;

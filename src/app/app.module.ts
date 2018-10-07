@@ -37,6 +37,7 @@ import { AddMovieComponent } from './movie/add-movie/add-movie.component';
 // **********************************Autre************************************//
 import { SearchComponent } from './other/search/search.component';
 import { CategoryService } from './services/category.service';
+import { LikeService } from './services/like.service';
 
 const appRoutes: Routes = [
   
@@ -90,6 +91,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
+    LikeService,
     AuthService,
     BooksService,
     PeopleService,

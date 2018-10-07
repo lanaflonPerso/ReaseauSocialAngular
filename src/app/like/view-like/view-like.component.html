@@ -1,17 +1,16 @@
-<div class="vote"> <!-- changer la classe -->
+<div [class]="myVote === 1 ? 'vote is-like' : 'vote is-disliked' ">
 
     <div class="vote_bar">
     	<div class="vote_progress" [ngStyle]="{'width': progressBar}"></div>
     </div>
   
-    <div class="vote_btns" *ngIf="currentUser !=null">
-  
+    <div class="vote_btns">
     	<form [formGroup]="likeForm" (ngSubmit)="onLike()">
-    		<button type="submit" class="vote_btn vote_like"><i class="fa fa-thumbs-up">{{ likeCount }}</i></button>
+    		<button type="submit" class="vote_btn vote_like" [disabled]="!currentUser || myVote===1"><i class="fa fa-thumbs-up">{{ likeCount }}</i></button>
     	</form>		
   
     	<form [formGroup]="dislikeForm" (ngSubmit)="onDislike()">
-    		<button type="submit" class="vote_btn vote_dislike"><i class="fa fa-thumbs-down">{{ dislikeCount }}</i></button>
+    		<button type="submit" class="vote_btn vote_dislike" [disabled]="!currentUser || myVote===-1"><i class="fa fa-thumbs-down">{{ dislikeCount }}</i></button>
     	</form>
   
     </div>
