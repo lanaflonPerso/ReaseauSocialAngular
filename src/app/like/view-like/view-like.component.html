@@ -4,7 +4,7 @@
     	<div class="vote_progress" [ngStyle]="{'width': progressBar}"></div>
     </div>
   
-    <div class="vote_btns">
+    <div class="vote_btns" *ngIf="currentUser !=null">
   
     	<form [formGroup]="likeForm" (ngSubmit)="onLike()">
     		<button type="submit" class="vote_btn vote_like"><i class="fa fa-thumbs-up">{{ likeCount }}</i></button>

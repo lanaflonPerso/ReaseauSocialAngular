@@ -7,6 +7,9 @@ export class People {
     picture: string;
     birthday: number;
 
+    dislikeCount: number;
+    likeCount: number;
+
     constructor(firstName, lastName, birthday) {
         this.firstName= firstName;
         this.lastName= lastName;

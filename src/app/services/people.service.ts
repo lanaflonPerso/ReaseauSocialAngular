@@ -3,19 +3,32 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { People } from "../models/people.models";
 import { URL } from "../config/app.const";
 
-@Injectable({
-    providedIn: 'root'
-  })
+@Injectable()
 export class PeopleService {
 
-	URL= URL;
-    people: People;
+  people: People;
 
-    constructor(private httpClient: HttpClient) { }
+	constructor(private http: HttpClient) { }
+	
+	getById(id :number) {
+		return new Promise(
+			(resolve, reject) => {
+				this.http.get<People>(URL+"/peoples/"+id)
+				.subscribe(
+					(data) => {
+						resolve(data);
+					},
+					(error) => {
+						reject(error);
+					}
+				);
+			}
+		);
+	}
 
 	createNewUser(firstName: string, lastName: string, birthday: string) {
-        this.people= new People(firstName, lastName, birthday);
-		this.httpClient.post(URL+"/peoples/add", this.people).subscribe(
+    this.people= new People(firstName, lastName, birthday);
+		this.http.post(URL+"/peoples/add", this.people).subscribe(
 			()=> {
 				console.log('Enregistrement terminé!');
 			},
@@ -27,7 +40,7 @@ export class PeopleService {
 
 	createNewUserInLikable(firstName, lastName, birthday, idLikable, type) {
 		this.people= new People(firstName, lastName, birthday);
-		this.httpClient.post(URL+"/peoples/add/"+type+"/"+idLikable, this.people).subscribe(
+		this.http.post(URL+"/peoples/add/"+type+"/"+idLikable, this.people).subscribe(
 			()=> {
 				console.log('Enregistrement terminé!');
 			},
@@ -36,5 +49,20 @@ export class PeopleService {
 			}
 		);
 	}
-		
+
+	searchByLastName(lastName: string) {
+		return new Promise(
+			(resolve, reject) => {
+				this.http.get(URL+"/peoples/search/"+lastName)
+				.subscribe(
+					(data) => {
+						resolve(data);
+					},
+					(error) => {
+						reject(error);
+					}
+				);
+			}
+		);				
+	}
 }

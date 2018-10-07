@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Movie } from '../../models/movie.models';
 import { MovieService } from '../../services/movie.service';
+import { PeopleService } from '../../services/people.service';
+import { People } from '../../models/people.models';
 
 @Component({
   selector: 'app-search',
@@ -10,12 +12,16 @@ import { MovieService } from '../../services/movie.service';
 })
 export class SearchComponent implements OnInit {
 
-  searchForm: FormGroup;
-  movies: Movie[]= [];
+  searchForm:FormGroup;
+  movies:Movie[]= [];
+  peoples:People[]= [];
   isResult:boolean= false;
 
-  constructor(private formBuilder: FormBuilder,
-              private movieService: MovieService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private movieService: MovieService,
+    private peopleService: PeopleService
+  ) { }
 
   ngOnInit() {
     this.initForm();
@@ -33,11 +39,9 @@ export class SearchComponent implements OnInit {
     const type= this.searchForm.get('type').value;
     console.log(value, type);
     if(type === "movie") {
-      this.movieService.searchMovies(value).then(
-        (movies: Movie[]) => {
-         this.searchMovie(value); 
-        }
-      );
+      this.searchMovie(value);
+    } else if (type === "people") {
+      this.searchPeople(value);
     }
     this.isResult= true;
   }
@@ -48,6 +52,14 @@ export class SearchComponent implements OnInit {
        this.movies= movies; 
       }
     );
+  }
+
+  searchPeople(value: string) {
+    this.peopleService.searchByLastName(value).then(
+      (peoples: People[]) => {
+        this.peoples= peoples
+      }
+    )
   }
 
 }

@@ -60,7 +60,6 @@ export class MusicService {
         .get<Album>(URL+"/music/album/"+id)
         .subscribe(
           (data) => {
-            console.log(data);
             resolve(data);
           },
           (error) => {

@@ -1,3 +1,25 @@
-<p>
-  view-people works!
-</p>
+<div class="row">
+  <div class="col-md-5">
+    <img [src]="people.picture" [alt]="people.lastName" class="img-fluid" *ngIf="people.picture">
+  </div>
+
+  <div class="col-md-7">
+    <h1>
+      {{ people.firstName }} {{ people.lastName }} <span *ngIf="people.birthday != 0">née en {{ people.birthday }}</span>
+      <i class="fas fa-pencil-alt" *ngIf="currentUser !=null"></i>
+      <button class="btn btn-danger" (click)="onSubmit()" *ngIf="isModified"><i class=" far fa-save"></i> Enregistrer</button>
+    </h1>
+
+    <app-view-like [dislikeCount]="people.dislikeCount" [likeCount]="people.likeCount" [progressBar]="progressBar" [id]="people.id"></app-view-like>
+
+    <h3>Biographie <i class="fas fa-pencil-alt" *ngIf="currentUser !=null" (click)="onUpdateBiography()"></i></h3>
+    <p *ngIf="!viewFormUpdateBiography">{{ people.biography }}</p>
+    <form class="form-group" *ngIf="viewFormUpdateBiography" [formGroup]="biographyFrom" (ngSubmit)="onSubmitUpdateBiography()">
+      <textarea rows="5" class="form-control" id="biography" formControlName="biography"></textarea>
+      <button class="btn btn-primary">Enregistrer</button>
+    </form>
+
+
+  </div>
+</div>
+

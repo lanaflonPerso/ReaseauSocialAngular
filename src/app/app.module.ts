@@ -36,6 +36,7 @@ import { AddMovieComponent } from './movie/add-movie/add-movie.component';
 
 // **********************************Autre************************************//
 import { SearchComponent } from './other/search/search.component';
+import { CategoryService } from './services/category.service';
 
 const appRoutes: Routes = [
   
@@ -53,12 +54,12 @@ const appRoutes: Routes = [
   { path: 'peoples/:id', component: ViewPeopleComponent },
 
   // **********************************WALL***********************************//
-  { path: 'wall', component: ViewWallComponent },
-  { path: 'wall/:id', component: AddCommentComponent },
+  { path: 'wall', component: ViewWallComponent, canActivate: [AuthGuardService] },
+  { path: 'wall/:id', component: AddCommentComponent, canActivate: [AuthGuardService] },
 
   // **********************************Music**********************************//
-  { path: 'album/add', component: AddAlbumComponent },
-  { path: 'album/view/:id', component: ViewAlbumComponent },
+  { path: 'albums/add', component: AddAlbumComponent, canActivate: [AuthGuardService] },
+  { path: 'albums/view/:id', component: ViewAlbumComponent },
 
   { path: 'search', component: SearchComponent },
   { path: '', redirectTo: '/wall', pathMatch: 'full' }
@@ -94,7 +95,8 @@ const appRoutes: Routes = [
     PeopleService,
     MovieService,
     WallService,
-    AuthGuardService
+    AuthGuardService,
+    CategoryService
   ],
   bootstrap: [AppComponent]
 })

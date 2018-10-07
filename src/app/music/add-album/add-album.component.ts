@@ -37,7 +37,6 @@ export class AddAlbumComponent implements OnInit {
       this.musicService.searchGroupByName(name).then(
         (groups: Group[]) => {
           this.groups= groups;
-          console.log(groups);
         }
       );
     }

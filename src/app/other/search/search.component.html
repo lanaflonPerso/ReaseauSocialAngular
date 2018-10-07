@@ -9,6 +9,7 @@
       <div class="form-group">
         <select id="type" class="form-control" formControlName="type">
           <option value="movie">Film</option>
+          <option value="people">Personalité</option>
           <option value="serie">Serie</option>
           <option value="game">Jeux Vidéo</option>
           <option value="album">Album</option>
@@ -21,9 +22,17 @@
   <div *ngIf="isResult" class=col-md-12>
     <div *ngIf="type === movie">
       <ul class="list-group">
-        <li class="list-group-item" *ngFor="let movie of movies" [routerLink]="['/movies/', movie.id ]">{{ movie.title }}</li>
+        <li class="list-group-item" *ngFor="let movie of movies" [routerLink]="['/movies/', movie.id ]">{{ movie.title | titlecase }}</li>
       </ul>
     </div>
   </div>
+
+  <div *ngIf="isResult" class=col-md-12>
+      <div *ngIf="type === people">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let people of peoples" [routerLink]="['/peoples/', people.id ]">{{ people.firstName | titlecase }} {{ people.lastName | titlecase }}</li>
+        </ul>
+      </div>
+    </div>
 </div>
 
