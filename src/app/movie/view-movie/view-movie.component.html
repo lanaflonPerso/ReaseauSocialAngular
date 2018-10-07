@@ -1,6 +1,10 @@
 <div class="row">
 	<div class="col-md-5">
-		<img class="img-fluid" [src]="movie.picture" [alt]="movie.title">
+		<img class="img-fluid" [src]="movie.picture" [alt]="movie.title" *ngIf="movie.picture">
+		<div *ngIf="!movie.picture">
+			<i class="fas fa-pencil-alt text-center" *ngIf="currentUser !=null" (click)="onFormActor()"></i>
+			<img class="img-fluid" src="https://p4.storage.canalblog.com/46/45/228346/116511769.jpg" [alt]="movie.title">
+		</div>
 	</div>
 
 	<div class="col-md-7">
@@ -9,6 +13,10 @@
 			<i class="fas fa-pencil-alt" *ngIf="currentUser !=null"></i>
 			<button class="btn btn-danger" (click)="onSubmit()" *ngIf="isModified"><i class=" far fa-save"></i> Enregistrer</button>
 		</h1>
+
+		<ul *ngFor="let category of movie.categorys">
+			<li>{{ category.name }}</li>
+		</ul>
 
 		<app-view-like [dislikeCount]="movie.dislikeCount" [likeCount]="movie.likeCount" [progressBar]="progressBar" [id]="movie.id"></app-view-like>
 
@@ -35,6 +43,10 @@
 
 				<button class="btn btn-primary mb-2">Enregistre</button>
 			</form>
+			<ul class="list-group" *ngIf="actors != null">
+				<li class="list-group-item" *ngFor="let actor of movie.actor; index as i"><span (click)="selectActor()">{{ actor.firstName }} {{ actor.lastName }}</span></li>
+			</ul>
+
 
 			<ul class="list-group">
 				<li class="list-group-item" *ngFor="let actor of movie.actors"><a routerLink="/peoples/{{ actor.id }}">{{ actor.firstName }} {{ actor.lastName }}</a></li>

@@ -7,7 +7,6 @@ import { URL } from '../config/app.const';
 @Injectable()
 export class MovieService {
 
-  movie: Movie;
   private movies= [];
   movieSubject= new Subject<any[]>();
   headers: string;
@@ -35,15 +34,26 @@ export class MovieService {
     );
   }
 
-  addMovie(title: string, releaseDate: number, picture: string, synopsis: string){
-    this.movie= new Movie(title, releaseDate, picture, synopsis);
-    this.http.post(URL+"/movies/add", this.movie, {observe: 'response'}).subscribe(
+  addMovie(movie: Movie){
+    this.http.post(URL+"/movies/add", movie, {observe: 'response'}).subscribe(
       (e) => {
+
+        const keys = e.headers.keys();
+        let headers = keys.map(key => 
+          `${key}: ${e.headers.get(key)}`);
+
         console.log(e);
+
+        console.log("location: "+e.headers.get('id'));
+        console.log("Location: "+e.headers.get('Location'))
+        console.log(e.headers.keys());
+        console.log("sur le tuto: "+headers);
+        console.log("sur location: "+e.headers.getAll('location'));
+        console.log("sur Location: "+e.headers.getAll('location'));
         console.log('headers: ' + e.headers.get('Custom-Header'));
       },
       (error)=> {
-        console.log('Erreur de sauvegarde!'+ error);
+        console.log('Erreur de sauvegarde!'+ error.Header);
       }
     );
   }

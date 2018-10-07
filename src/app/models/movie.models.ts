@@ -1,4 +1,5 @@
 import { People } from "./people.models";
+import { Category } from "./category.model";
 
 export class Movie {
     id: number;
@@ -8,6 +9,7 @@ export class Movie {
     picture: string;
     synopsis: string;
     actors: People[];
+    categorys: Category[];
 
     dislikeCount: number;
     likeCount: number;

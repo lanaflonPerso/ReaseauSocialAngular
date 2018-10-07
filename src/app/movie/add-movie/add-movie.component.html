@@ -1,11 +1,25 @@
 <div class="row">
-  <div class="col-md-8 md-offset-2">
+  <div class="col-md-12">
     <h2>Ajout d'un film</h2>
+  </div>
+
+  <div class="col-md-8">
     <form [formGroup]="movieForm" (ngSubmit)="onSubmit()">
 
         <div class="form-group">
-          <label for="title">Titre: </label>
+          <label for="title">Titre:</label>
           <input type="text" id="title" class="form-control" formControlName="title">
+        </div>
+
+        <div class="form-group">
+          <label for="category">Categories:</label>
+          <div class="form-inline">
+            <input type="text" id="category" class="form-control" (keyup)="searchCategory()" formControlName="category"/>
+            <span class="btn btn-outline-info"  (click)="addCategoryByName()"><i class="fas fa-plus"></i></span>
+          </div>
+          <ul class="list-group" *ngIf="resultCategory">
+            <li class="list-group-item" *ngFor="let category of resultCategory; index as i"><span (click)="addCategory(i)">{{ category.name }}</span></li>
+          </ul>
         </div>
 
         <div class="form-group">
@@ -14,17 +28,42 @@
         </div>
 
         <div class="form-group">
-          <label for="picture">Pochette: </label>
+          <label for="actor">Acteurs:</label>
+          <div class="form-inline">
+            <input type="text" id="firstName" placeholder="prénom" class="form-control" formControlName="actorFirstName" />
+            <input type="text" id="lastName" placeholder="nom" class="form-control" (keyup)="searchActor()" formControlName="actorLastName"/>
+            <span class="btn btn-outline-info" (click)="addActorByName()"><i class="fas fa-plus"></i></span>
+          </div>
+          <ul class="list-group" *ngIf="resultActor">
+              <li class="list-group-item" *ngFor="let actor of resultActor; index as i"><span (click)="addActor(i)">{{ actor.firstName }} {{ actor.lastName }}</span></li>
+            </ul>
+        </div>
+
+        <div class="form-group">
+          <label for="picture">Pochette:</label>
           <input type="text" class="form-control" id="picture" formControlName="picture">
         </div>
 
         <div class="form-group">
-          <label for="synopsis">Synopsis: </label>
+          <label for="synopsis">Synopsis:</label>
           <textarea rows="4" class="form-control" id="synopsis" formControlName="synopsis"></textarea>
         </div>
 
         <button class="btn btn-primary" type="submit" [disabled]="movieForm.invalid">Enregistrer</button>
     </form>
     <p class="text-danger">{{ errorMessage }}</p>
+
+  </div>
+  
+  <div class="col-md-4">
+    <h3 *ngIf="selectCategory.length > 0">list des categories</h3>
+    <ul class="list-group" *ngIf="selectCategory.length > 0">
+      <li class="list-group-item" *ngFor="let category of selectCategory; index as i"><span>{{ category.name | uppercase }}</span></li>
+    </ul>
+  
+    <h3 *ngIf="selectActor.length > 0">List des Acteur</h3>
+    <ul class="list-group" *ngIf="selectActor.length > 0">
+      <li class="list-group-item" *ngFor="let actor of selectActor; indes as i"><span>{{ actor.firstName| titlecase }} {{ actor.lastName| titlecase }}</span></li>
+    </ul> 
   </div>
 </div>
