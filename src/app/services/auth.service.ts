@@ -4,9 +4,7 @@ import { User } from '../models/User.model';
 import { URL } from '../config/app.const';
 import { of, Observable, Subject } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
 
 	userSubject= new Subject<User>();
@@ -14,14 +12,12 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-
 	emitUserSubject() {
 		this.userSubject.next(this.user);
 	}
 
-	createNewUser(firstName: string, lastName: string, email: string, password: string) {
-    let user= new User(firstName, lastName, email, password);
-		this.http.post(URL+'users/sign-up', user, {observe: 'response'}).subscribe(
+	signUp(user: User) {
+		this.http.post(URL+'/users/sign-up', user, {observe: 'response'}).subscribe(
 			(response)=> {
 				console.log('Enregistrement terminé!');
 			},

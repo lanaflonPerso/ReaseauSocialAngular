@@ -77,6 +77,10 @@ export class AddMovieComponent implements OnInit {
     this.movieForm.patchValue({actorFirstName: '', actorLastName: ''});
   }
 
+  removeActor(index: number) {
+    this.selectActor.splice(index, 1);
+  }
+
   addActorByName() {
     const firstName= this.movieForm.get('actorFirstName').value;
     const lastName= this.movieForm.get('actorLastName').value;
@@ -109,5 +113,9 @@ export class AddMovieComponent implements OnInit {
     newMovie.categorys= this.selectCategory;
 
     this.movieService.addMovie(newMovie);
+  }
+
+  voirTab() {
+    console.log(this.selectActor);
   }
 }

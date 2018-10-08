@@ -25,6 +25,7 @@ export class ViewPeopleComponent implements OnInit {
   progressBar:String;
   countLike:number;
   
+  viewFormAddRole:boolean= false;
   viewFormUpdateBiography:boolean= false;
   biographyFrom:FormGroup;
 
@@ -49,7 +50,6 @@ export class ViewPeopleComponent implements OnInit {
   }
 
   getPeople() {
-  
     this.peopleService.getById(this.id).then(
       (people: People) => {
         this.people= people;
@@ -69,6 +69,10 @@ export class ViewPeopleComponent implements OnInit {
 
   onSubmitUpdateBiography() {
 
+  }
+
+  onAddRole() {
+    this.viewFormAddRole= true;
   }
 
   onSubmit() {

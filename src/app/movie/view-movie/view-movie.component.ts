@@ -50,6 +50,7 @@ export class ViewMovieComponent implements OnInit {
 		const id= this.route.snapshot.params['id'];
 		this.movieService.getMovieById(+id).then(
 			(movie: Movie) => {
+				console.log(movie);
         this.movie= movie;
 				this.countLike= this.movie.dislikeCount+this.movie.likeCount;
 				let pourcent= this.movie.likeCount/(this.countLike)*100;

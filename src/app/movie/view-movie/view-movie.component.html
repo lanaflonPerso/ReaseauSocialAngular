@@ -30,7 +30,7 @@
 		</div>
 
 		<div class=col-md-12>
-			<h3>Acteurs <i class="fas fa-plus" *ngIf="currentUser !=null" (click)="onFormActor()"></i></h3>
+			<h3>Acteurs <i class="fas fa-plus-circle" *ngIf="currentUser !=null" (click)="onFormActor()"></i></h3>
 
 			<form class="form-inline" *ngIf="viewFormActor" [formGroup]="actorForm" (ngSubmit)="onSubmitActor()">
 				<div class="form-group mr-2">

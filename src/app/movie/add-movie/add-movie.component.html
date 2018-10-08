@@ -58,12 +58,18 @@
   <div class="col-md-4">
     <h3 *ngIf="selectCategory.length > 0">list des categories</h3>
     <ul class="list-group" *ngIf="selectCategory.length > 0">
-      <li class="list-group-item" *ngFor="let category of selectCategory; index as i"><span>{{ category.name | uppercase }}</span></li>
+      <li class="list-group-item" *ngFor="let category of selectCategory; index as i">
+        <span>{{ category.name | uppercase }}</span>
+        <i class="fas fa-minus-circle float-right" (click)="removeCategory(i)"></i>
+      </li>
     </ul>
   
     <h3 *ngIf="selectActor.length > 0">List des Acteur</h3>
     <ul class="list-group" *ngIf="selectActor.length > 0">
-      <li class="list-group-item" *ngFor="let actor of selectActor; indes as i"><span>{{ actor.firstName| titlecase }} {{ actor.lastName| titlecase }}</span></li>
-    </ul> 
+      <li class="list-group-item" *ngFor="let actor of selectActor; index as i">
+        <span>{{ actor.firstName| titlecase }} {{ actor.lastName| titlecase }}</span>
+        <i class="fas fa-minus-circle float-right" (click)="removeActor(i)"></i>
+      </li>
+    </ul>
   </div>
 </div>
