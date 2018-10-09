@@ -38,9 +38,14 @@ import { AddMovieComponent } from './movie/add-movie/add-movie.component';
 import { SearchComponent } from './other/search/search.component';
 import { CategoryService } from './services/category.service';
 import { LikeService } from './services/like.service';
+import { ViewCategoryComponent } from './category/view-category/view-category.component';
+import { ViewUserComponent } from './user/view-user/view-user.component';
 
 const appRoutes: Routes = [
-  
+
+  // **********************************UTILISATEUR*******************************//
+  { path: 'user/view', component: ViewUserComponent },
+
   // **********************************UTILISATEUR*******************************//
   { path: 'auth/signup', component: SignupComponent },
   { path: 'auth/signin', component: SigninComponent },
@@ -49,6 +54,9 @@ const appRoutes: Routes = [
   { path: 'movies/add', component: AddMovieComponent, canActivate: [AuthGuardService] },
   { path: 'movies/:id', component: ViewMovieComponent },
 
+  // **********************************CATEGORY*********************************//
+  { path: 'categorys/:id', component: ViewCategoryComponent },
+  
   // **********************************PEOPLE**********************************//
   { path: 'peoples/add/:type/:id', component: AddPeopleComponent },
   { path: 'peoples/add', component: AddPeopleComponent },
@@ -81,7 +89,9 @@ const appRoutes: Routes = [
     ViewPeopleComponent,
     AddAlbumComponent,
     ViewAlbumComponent,
-    SearchComponent
+    SearchComponent,
+    ViewCategoryComponent,
+    ViewUserComponent
   ],
   imports: [
     BrowserModule,

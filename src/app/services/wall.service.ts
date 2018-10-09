@@ -9,7 +9,7 @@ import { Wall } from '../models/wall.model';
 })
 export class WallService {
 
-    walls: Wall[]; 
+  walls: Wall[]; 
 	URL= URL;
 	shMessage: ShMessage;
 
@@ -24,26 +24,27 @@ export class WallService {
 				console.log('Message Enregistrer!');
 				console.log(response);
 			},
-        	(error)=> {
-            	console.log('Erreur de sauvegarde!'+ error);
-        	}
-    	);
+			(error)=> {
+				console.log('Erreur de sauvegarde!'+ error);
+			}
+    );
 	}
 
 	getWall() {
-        return new Promise(
-            (resolve, reject) => {
-                this.httpClient
-                .get<Wall>(this.URL+"/wall")
-                .subscribe(
-                    (data) => {
-                        resolve(data);
-                    },
-                    (error) => {
-                        reject(error);
-                    }
-                );
-            }
-        );
-    }
+		return new Promise(
+			(resolve, reject) => {
+				this.httpClient
+				.get<Wall>(this.URL+"/wall")
+				.subscribe(
+						(data) => {
+							console.log(data);
+							resolve(data);
+						},
+						(error) => {
+							reject(error);
+						}
+					);
+				}
+		);
+	}
 }

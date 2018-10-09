@@ -8,15 +8,19 @@ import { URL } from '../config/app.const';
 })
 export class CommentService {
 
-  comment: Comment;
-  URL= URL;
+  comments: Comment[];
 
   constructor(private http: HttpClient){}
 
+  init(comments: Comment[]) {
+    this.comments= [];
+    this.comments= comments;
+  }
+
   addComment(id: number, content: string) {
-    let url= this.URL+"/wall/"+id+"/add";
-    this.comment= new Comment(content, new Date());
-    this.http.post(url, this.comment).subscribe(
+    let url= URL+"/wall/"+id+"/add";
+    let comment= new Comment(content, new Date());
+    this.http.post(url, comment).subscribe(
       (e) => {
         console.log('Commentaire enregistrer!');
       },
@@ -25,5 +29,4 @@ export class CommentService {
       }
     );
   }
-
 }

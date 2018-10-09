@@ -9,21 +9,24 @@
 		</form>
 	</div>
 
-	<div class="col-md-12" *ngFor="let brick of bricks">
+	<div class="col-md-12" *ngFor="let brick of bricks; index as i">
 
-		<p>{{ brick.user.firstName }} {{ brick.user.lastName }} {{ brick.html }}</p>
-		<p>{{ brick.html }}</p>
-
-		<div *ngIf="viewMessage">
-			<p>on voit les messages</p>
-		</div>
+		<p>
+			<a [routerLink]="['/users', brick.user.id]">{{ brick.user.firstName }} {{ brick.user.lastName }}</a> 
+			<span class="m-3" [innerHTML]="brick.html" (click)="goTo(i)"></span>
+		</p>
 
 		<footer class="footerMessage">
-			<span>{{ brick.createdDate | date }}</span>
-			<span>{{brick.id }}</span>
-
-			<ul>
-				<li><a [routerLink]="['/wall', brick.id]">{{ brick.comments.length }} Commentaire</a></li>
+			<ul class="list-inline">
+				<li class="list-inline-item">{{ brick.createdDate | date:'short' }}</li>
+				<li class="list-inline-item">
+					<!-- <a [routerLink]="['/wall', brick.id]"> -->
+						<button type="button" class="btn btn-primary" (click)="navigateToAddComment(i)">
+							Commentaire(s)
+							<span class="badge badge-light">{{ brick.comments.length }}</span>
+						</button>
+					<!-- </a> -->
+				</li>
 			</ul>
 		</footer>
 		<hr>

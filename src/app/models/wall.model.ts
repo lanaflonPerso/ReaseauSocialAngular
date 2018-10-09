@@ -10,7 +10,6 @@ export class Wall {
     likable: Likable;
     comments: Comment[];
 
-
     icone: string;
 
     constructor(id, type, html) {

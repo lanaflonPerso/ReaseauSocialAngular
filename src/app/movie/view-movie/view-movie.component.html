@@ -14,8 +14,8 @@
 			<button class="btn btn-danger" (click)="onSubmit()" *ngIf="isModified"><i class=" far fa-save"></i> Enregistrer</button>
 		</h1>
 
-		<ul *ngFor="let category of movie.categorys">
-			<li>{{ category.name }}</li>
+		<ul class="list-group" *ngFor="let category of movie.categorys">
+			<li class="list-group-item" [routerLink]="['/categorys', category.id]">{{ category.name }}</li>
 		</ul>
 
 		<app-view-like [dislikeCount]="movie.dislikeCount" [likeCount]="movie.likeCount" [progressBar]="progressBar" [id]="movie.id"></app-view-like>
@@ -49,7 +49,7 @@
 
 
 			<ul class="list-group">
-				<li class="list-group-item" *ngFor="let actor of movie.actors"><a routerLink="/peoples/{{ actor.id }}">{{ actor.firstName }} {{ actor.lastName }}</a></li>
+				<li class="list-group-item" *ngFor="let actor of movie.actors" [routerLink]="['/peoples', actor.id]">{{ actor.firstName }} {{ actor.lastName }}</li>
 			</ul>
 
 		</div>
